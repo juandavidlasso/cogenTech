@@ -1,0 +1,21 @@
+
+CREATE TABLE `cogentech`.`boss` ( `id_jefe` INT NOT NULL AUTO_INCREMENT , `nombre` TEXT NOT NULL , `email` TEXT NOT NULL , `cargo` TEXT NOT NULL , PRIMARY KEY (`id_jefe`)) ENGINE = InnoDB;
+
+
+CREATE TABLE `cogentech`.`employees` ( `id_empleado` INT NOT NULL AUTO_INCREMENT , `nombre` TEXT NOT NULL , `email` TEXT NOT NULL , `cargo` TEXT NOT NULL , `jefe_id` INT NULL , PRIMARY KEY (`id_empleado`)) ENGINE = InnoDB;
+
+
+
+CREATE TABLE `cogentech`.`history_change` ( `id_history_change` INT NOT NULL AUTO_INCREMENT , `empleado_id` INT NOT NULL , `jefe_id` INT NOT NULL , `version` INT NOT NULL , `fecha_actualizacion` DATETIME NOT NULL , PRIMARY KEY (`id_history_change`)) ENGINE = InnoDB;
+
+
+ALTER TABLE `history_change` ADD FOREIGN KEY (`empleado_id`) REFERENCES `employees`(`id_empleado`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+ALTER TABLE `history_change` ADD FOREIGN KEY (`jefe_id`) REFERENCES `boss`(`id_jefe`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+INSERT INTO `boss` (`id_jefe`, `nombre`, `email`, `cargo`) VALUES (NULL, 'Carlos Andres', 'carlos@gmail.com', 'gerente'), (NULL, 'Luis alfonso', 'luis@hotmail.com', 'Jefe tesoreria'), (NULL, 'Patricia Antia', 'patricia@hotmail.com', 'Jefe recursos humanos')
+
+
+
