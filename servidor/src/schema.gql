@@ -1,0 +1,76 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Boss {
+  id_jefe: Int!
+  nombre: String!
+  email: String!
+  cargo: String!
+}
+
+type Employee {
+  id_empleado: Int!
+  nombre: String!
+  email: String!
+  cargo: String!
+  jefe_id: Int
+  dataBoss: Boss
+}
+
+type HistoryChange {
+  id_history_change: Int!
+  empleado_id: Int!
+  jefe_id: Int!
+  version: Float!
+  fecha_actualizacion: DateTime!
+  dataEmployee: Employee!
+  dataBoss: Boss!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  getEmployees: [Employee!]!
+  getEmployee(id: Int!): Employee!
+  getBoss: [Boss!]!
+  getHistoryChangeEmployee(id: Int!): [HistoryChange!]!
+  getLastVersionEmployee(id: Int!): Float!
+}
+
+type Mutation {
+  createEmployee(createEmployeeInput: CreateEmployeeInput!): Employee!
+  updateBossEmployee(updateEmployeeInput: UpdateEmployeeInput!): Employee!
+  createBoss(createBossInput: CreateBossInput!): Boss!
+  createHistoryChange(createHistoryChangeInput: CreateHistoryChangeInput!): HistoryChange!
+}
+
+input CreateEmployeeInput {
+  nombre: String!
+  email: String!
+  cargo: String!
+  jefe_id: Int
+}
+
+input UpdateEmployeeInput {
+  nombre: String
+  email: String
+  cargo: String
+  jefe_id: Int
+  id_empleado: Int!
+}
+
+input CreateBossInput {
+  nombre: String!
+  email: String!
+  cargo: String!
+}
+
+input CreateHistoryChangeInput {
+  empleado_id: Int!
+  jefe_id: Int!
+  version: Float!
+}
